@@ -50,6 +50,7 @@
     <orderEntry type="library" scope="PROVIDED" name="globalid (v0.4.1, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.9.5, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.7.0, rbenv: 2.5.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="jwt (v2.1.0, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="launchy (v2.4.3, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="letter_opener (v1.4.1, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="listen (v3.1.5, rbenv: 2.5.0) [gem]" level="application" />
@@ -82,6 +83,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rspec-support (v3.7.1, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby_dep (v1.5.0, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="shoulda-matchers (v3.1.2, rbenv: 2.5.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simple_command (v0.0.9, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring (v2.0.2, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring-commands-rspec (v1.0.4, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="spring-watcher-listen (v2.0.1, rbenv: 2.5.0) [gem]" level="application" />

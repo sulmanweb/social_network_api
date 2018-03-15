@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :v1, defaults: {format: 'json'} do
     namespace :auth do
       post 'sign_up', to: 'registrations#create'
+      post 'sign_in', to: 'sessions#create'
     end
   end
 end
