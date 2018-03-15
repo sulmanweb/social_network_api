@@ -3,3 +3,7 @@ en:
   errors:
     not_found: "Sorry the page you requested could not be found"
     internal_server_error: "There was an internal server error. Please contact Admin"
+    users:
+      format_email: "entered is not in correct format"
+      format_username: "must contain 1 to 15 lowercase characters, and/or numeric characters and/or underscores"
+      format_password: "must contain at least a lowercase letter, a uppercase, a digit, a special char and 8 to 72 chars"
