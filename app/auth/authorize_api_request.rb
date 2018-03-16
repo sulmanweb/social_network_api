@@ -26,7 +26,7 @@ class AuthorizeApiRequest
         end
       end
     end
-    @user || errors.add(:token, 'Invalid token') && nil
+    @user || errors.add(:token, I18n.t('errors.invalid_token')) && nil
   end
 
   def decoded_auth_token
@@ -37,7 +37,7 @@ class AuthorizeApiRequest
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
     else
-      errors.add(:token, 'Missing token')
+      errors.add(:token, I18n.t('errors.token_missing'))
     end
     nil
   end

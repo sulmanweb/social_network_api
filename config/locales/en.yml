@@ -5,6 +5,8 @@ en:
     internal_server_error: "There was an internal server error. Please contact Admin"
     insufficient_params: "Required params are not provided"
     invalid_token: "The token provided is invalid"
+    invalid_credentials: "Invalid Credentials provided"
+    token_missing: "Token required is not present"
     users:
       format_email: "entered is not in correct format"
       format_username: "must contain 1 to 15 lowercase characters, and/or numeric characters and/or underscores"
