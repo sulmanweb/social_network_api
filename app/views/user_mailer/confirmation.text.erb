@@ -1,0 +1,4 @@
+<%= I18n.t('user_mailer.confirmation.greetings') %> <%= @user.name %>
+<%= I18n.t('user_mailer.confirmation.body1') %>
+<%= v1_auth_confirm_email_url(token: @user_confirmation.token) %>
+<%= I18n.t('user_mailer.confirmation.footer') %>

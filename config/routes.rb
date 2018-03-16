@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post 'sign_in', to: 'sessions#create'
       delete 'sign_out', to: 'sessions#destroy'
       delete 'destroy', to: 'registrations#destroy'
+      put 'confirm_email', to: 'confirmations#create'
     end
   end
 end
