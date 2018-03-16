@@ -32,7 +32,7 @@ class User < ApplicationRecord
   def send_confirmation
     unless self.confirmed?
       user_confirmation = UserConfirmation.create(user: self, c_type: :email_confirmation)
-      UserMailer.confirmation(self.id, user_confirmation.id).deliver_now
+      UserMailer.confirmation(self.id, user_confirmation.id).deliver_later
     end
   end
 end
