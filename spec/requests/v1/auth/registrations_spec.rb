@@ -26,4 +26,25 @@ RSpec.describe "V1::Auth::Registrations", type: :request do
       expect(response).to have_http_status(422)
     end
   end
+
+  describe "DELETE /v1/auth/destroy" do
+    let(:session) {FactoryBot.create(:session)}
+    it "destroys the user from the system" do
+      headers = sign_in_test_headers session
+      delete v1_auth_destroy_path, headers: headers
+      expect(response).to have_http_status(204)
+      expect(User.find_by_id(session.user_id)).to eql nil
+    end
+    it "gives error if user not signed in" do
+      delete v1_auth_destroy_path
+      expect(response).to have_http_status(401)
+    end
+    it "gives error if wrong tokens" do
+      session = FactoryBot.create(:session)
+      session.uid = 'aaaaaaaaaaaaaaaaaaaaa'
+      headers = sign_in_test_headers session
+      delete v1_auth_destroy_path, headers: headers
+      expect(response).to have_http_status(401)
+    end
+  end
 end

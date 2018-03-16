@@ -1,7 +1,16 @@
 class V1::Auth::SessionsController < ApplicationController
 
+  before_action :authenticate_user, only: %i[destroy]
+
   def create
     authenticate params[:auth], params[:password]
+  end
+
+  def destroy
+    headers = request.headers['Authorization'].split(' ').last
+    session = Session.find_by(uid: JsonWebToken.decode(headers)[:uid])
+    session.update(status: false)
+    render status: :no_content, json: {}
   end
 
   private

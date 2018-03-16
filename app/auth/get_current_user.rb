@@ -1,4 +1,4 @@
-class AuthorizeApiRequest
+class GetCurrentUser
   prepend SimpleCommand
 
   def initialize(headers = {})
@@ -26,18 +26,16 @@ class AuthorizeApiRequest
         end
       end
     end
-    @user || errors.add(:token, 'Invalid token') && nil
+    @user
   end
 
   def decoded_auth_token
-    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
+    @decoded_auth_token ||= JsonWebToken.decode(http_auth_header) if http_auth_header
   end
 
   def http_auth_header
     if headers['Authorization'].present?
       return headers['Authorization'].split(' ').last
-    else
-      errors.add(:token, 'Missing token')
     end
     nil
   end

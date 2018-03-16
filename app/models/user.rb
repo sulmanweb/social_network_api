@@ -11,6 +11,9 @@ class User < ApplicationRecord
 
   validates :password_confirmation, presence: true, if: :password_required?
 
+  ## Relationships
+  has_many :sessions, dependent: :destroy
+
   private
 
   # is password required for user?

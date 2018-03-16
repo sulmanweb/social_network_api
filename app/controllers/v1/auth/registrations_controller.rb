@@ -1,5 +1,7 @@
 class V1::Auth::RegistrationsController < ApplicationController
 
+  before_action :authenticate_user, only: %i[destroy]
+
   def create
     @user = User.new register_params
 
@@ -8,6 +10,11 @@ class V1::Auth::RegistrationsController < ApplicationController
     else
       return render_error_save @user
     end
+  end
+
+  def destroy
+    current_user.destroy!
+    render status: :no_content, json: {}
   end
 
   protected
