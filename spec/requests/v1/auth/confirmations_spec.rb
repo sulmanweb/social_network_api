@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "V1::Auth::Registrations", type: :request do
+RSpec.describe "V1::Auth::Confirmations", type: :request do
   describe "GET /v1/auth/confirm_email" do
     let(:user) {FactoryBot.create(:user)}
     it "confirms the new user in system" do

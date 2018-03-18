@@ -18,7 +18,7 @@ class AuthorizeApiRequest
     if decoded_auth_token
       session = Session.find_by(status: true, uid: decoded_auth_token[:uid])
       if !session.nil? && session.user_id == decoded_auth_token[:user_id]
-        if session.last_used_at + TOKEN_LIFETIME < Time.zone.now
+        if session.last_used_at + SESSION_TOKEN_LIFETIME < Time.zone.now
           session.update(status: false)
         else
           session.update(last_used_at: Time.zone.now)

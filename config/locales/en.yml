@@ -7,6 +7,7 @@ en:
     invalid_token: "The token provided is invalid"
     invalid_credentials: "Invalid Credentials provided"
     token_missing: "Token required is not present"
+    late_token: "Sorry your token lifetime is gone. Please regenerate."
     users:
       format_email: "entered is not in correct format"
       format_username: "must contain 1 to 15 lowercase characters, and/or numeric characters and/or underscores"
@@ -18,3 +19,12 @@ en:
       body1: "Welcome to social casts. Click on the link below to verify your email please."
       call_to_action: "Confirm You Email"
       footer: "Best Regards and Happy Socialism."
+    reset_password:
+      subject: "Someone sent a reset password request"
+      greetings: "Hi!"
+      body1: "Someone has sent a reset password request. If you sent the request then click on the link below to change your password otherwise ignore this message"
+      call_to_action: "Change Your Password"
+      footer: "Best Regards and Happy Socialism."
+  messages:
+    forget_request_sent: "Change password instructions has been sent to the email."
+    password_reset: "Your password has been reset successfully"
