@@ -18,6 +18,12 @@ gem 'jbuilder', '2.7.0'
 gem 'rack-cors', '1.0.2'
 # for secret keys
 gem 'figaro', '1.1.1'
+# for encrypted passwords
+gem 'bcrypt', '3.1.11'
+# for jwt tokens
+gem 'jwt', '2.1.0'
+# for service objects
+gem 'simple_command', '0.0.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

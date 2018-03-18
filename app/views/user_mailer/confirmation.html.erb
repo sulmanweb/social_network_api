@@ -1,0 +1,21 @@
+<h1><%= I18n.t('user_mailer.confirmation.greetings') %> <%= @user.name %></h1>
+
+<p><%= I18n.t('user_mailer.confirmation.body1') %></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
+  <tbody>
+  <tr>
+    <td align="center">
+      <table border="0" cellpadding="0" cellspacing="0">
+        <tbody>
+        <tr>
+          <td> <%= link_to I18n.t('user_mailer.confirmation.call_to_action'), v1_auth_confirm_email_url(token: @user_confirmation.token) %> </td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<p><%= I18n.t('user_mailer.confirmation.footer') %></p>
