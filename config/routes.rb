@@ -15,5 +15,6 @@ Rails.application.routes.draw do
       put 'change_password', to: 'passwords#change_password'
     end
     resources :posts, only: %i[create update destroy]
+    get '/users/:user_id/posts', to: 'posts#user_posts', as: :user_posts
   end
 end

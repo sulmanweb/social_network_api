@@ -59,4 +59,30 @@ RSpec.describe "V1::Posts", type: :request do
       expect(response).to have_http_status(403)
     end
   end
+
+  describe "GET /v1/:user_id/posts" do
+    let(:user) {FactoryBot.create(:user)}
+    before do
+      7.times.each do
+        FactoryBot.create(:post, user_id: user.id)
+      end
+    end
+    it "Shows user posts" do
+      get v1_user_posts_path(limit: 5, user_id: user.id)
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 2
+      expect(json['page_info']['total_records']).to eql 7
+    end
+    it "gives zero records if user has no posts" do
+      user = FactoryBot.create(:user)
+      get v1_user_posts_path(limit: 5, user_id: user.id)
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 0
+      expect(json['page_info']['total_records']).to eql 0
+    end
+  end
 end
