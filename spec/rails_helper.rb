@@ -2,6 +2,7 @@
 require 'spec_helper'
 # should a matcher settings
 require 'shoulda/matchers'
+require "pundit/rspec"
 include ActiveJob::TestHelper
 
 Shoulda::Matchers.configure do |config|

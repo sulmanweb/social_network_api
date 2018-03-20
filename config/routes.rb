@@ -14,5 +14,6 @@ Rails.application.routes.draw do
       get 'update_reset', to: 'passwords#update'
       put 'change_password', to: 'passwords#change_password'
     end
+    resources :posts, only: %i[create update destroy]
   end
 end

@@ -66,6 +66,7 @@
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.8.2, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v3.0.2, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.11.3, rbenv: 2.5.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pundit (v1.1.0, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack (v2.0.4, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-cors (v1.0.2, rbenv: 2.5.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v0.8.3, rbenv: 2.5.0) [gem]" level="application" />

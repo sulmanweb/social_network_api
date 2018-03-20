@@ -1,0 +1,1 @@
+json.partial! 'v1/posts/post.json.jbuilder', post: @post

@@ -24,6 +24,8 @@ gem 'bcrypt', '3.1.11'
 gem 'jwt', '2.1.0'
 # for service objects
 gem 'simple_command', '0.0.9'
+# for authorizations
+gem 'pundit', '1.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
