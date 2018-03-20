@@ -243,3 +243,4 @@ GitHub.sublime-settings
 /config/application.yml
 /public/dist
 /public/dist.zip
+.idea/
