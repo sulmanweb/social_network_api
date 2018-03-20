@@ -50,6 +50,9 @@
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
           },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
           },
@@ -88,6 +91,9 @@
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
           },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
           },
@@ -113,6 +119,9 @@
           },
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
           },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
@@ -144,6 +153,9 @@
           },
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
           },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
@@ -184,6 +196,9 @@
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
           },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
           },
@@ -222,6 +237,9 @@
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
           },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
           },
@@ -255,6 +273,9 @@
           },
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
           },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
@@ -294,6 +315,200 @@
           "401": {
             "$ref": "#/responses/trait:standardErrors:401"
           },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/posts": {
+      "post": {
+        "operationId": "POST_posts",
+        "summary": "Create Post",
+        "tags": [
+          "Posts"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/post"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/posts/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "PUT_posts-id",
+        "summary": "Update Post",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Only Post owner can edit the post",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post-input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/post"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "DELETE_posts-id",
+        "summary": "Delete Post",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Only Post owner can delete the post",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/{user_id}/posts": {
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "operationId": "GET_users-user_id-posts",
+        "summary": "User Posts",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Get the user posts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/post-index"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
           "404": {
             "$ref": "#/responses/trait:standardErrors:404"
           },
@@ -312,8 +527,46 @@
       }
     }
   },
+  "parameters": {
+    "trait:pagination:limit": {
+      "name": "limit",
+      "in": "query",
+      "description": "Record size",
+      "type": "integer"
+    },
+    "trait:pagination:page": {
+      "name": "page",
+      "in": "query",
+      "description": "page number to get",
+      "type": "integer"
+    },
+    "trait:pagination:timestamp": {
+      "name": "timestamp",
+      "in": "query",
+      "description": "Timestamp until records being needed",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
   "responses": {
     "trait:standardErrors:401": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    },
+    "trait:standardErrors:403": {
       "description": "",
       "schema": {
         "type": "object",
@@ -537,6 +790,114 @@
         "password",
         "password_confirmation"
       ]
+    },
+    "post-input": {
+      "title": "Post Input",
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "example": {
+        "body": "quis mollit"
+      }
+    },
+    "post": {
+      "title": "Post",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "body": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "body",
+        "user_id",
+        "created_at"
+      ],
+      "example": {
+        "id": 41399876,
+        "body": "proident magna nulla sunt",
+        "user_id": 55747923,
+        "created_at": "2667-10-01T17:21:46.143Z"
+      }
+    },
+    "page-info": {
+      "title": "Page Info",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time before which the records are presented"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "max records per page to be shown"
+        },
+        "page_size": {
+          "type": "integer",
+          "description": "records shown in current page"
+        },
+        "more_available": {
+          "type": "boolean",
+          "description": "more pages available or not"
+        },
+        "total_records": {
+          "type": "integer",
+          "description": "total records available in db"
+        },
+        "page": {
+          "type": "integer",
+          "default": "",
+          "description": "current page number"
+        },
+        "total_pages": {
+          "type": "integer",
+          "description": "Total pages according to limit available in system"
+        }
+      },
+      "required": [
+        "timestamp",
+        "limit",
+        "page_size",
+        "more_available",
+        "total_records",
+        "page",
+        "total_pages"
+      ]
+    },
+    "post-index": {
+      "title": "Post Index",
+      "type": "object",
+      "properties": {
+        "page_info": {
+          "$ref": "#/definitions/page-info"
+        },
+        "posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/post"
+          }
+        }
+      }
     }
   }
 }

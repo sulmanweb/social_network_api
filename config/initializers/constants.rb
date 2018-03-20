@@ -5,3 +5,4 @@ DEFAULT_MAILER = "info@castsapp.com".freeze
 EMAIL_CONFIRMATION_SITE = "http://social.castsapp.com/redirects/email_confirmed".freeze
 EMAIL_RESET_SITE = "http://social.castsapp.com/redirects/reset_password".freeze
 RESET_TOKEN_LIFETIME = 8.hours
+PAGE_LIMIT = 20

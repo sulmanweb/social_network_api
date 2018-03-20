@@ -14,6 +14,7 @@ class User < ApplicationRecord
   ## Relationships
   has_many :sessions, dependent: :destroy
   has_many :user_confirmations, dependent: :destroy
+  has_many :posts, dependent: :destroy
 
   after_create :send_confirmation
 

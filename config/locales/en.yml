@@ -28,3 +28,8 @@ en:
   messages:
     forget_request_sent: "Change password instructions has been sent to the email."
     password_reset: "Your password has been reset successfully"
+  pundit:
+     default: 'You cannot perform this action.'
+     post_policy:
+       update?: 'You are not the author of this post'
+       create?: 'You cannot create posts!'

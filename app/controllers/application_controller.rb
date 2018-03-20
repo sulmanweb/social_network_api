@@ -1,7 +1,9 @@
 class ApplicationController < ActionController::API
+  include Pundit
   attr_reader :current_user
 
   before_action :get_current_user
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   include ExceptionHandler
 
@@ -19,5 +21,12 @@ class ApplicationController < ActionController::API
 
   def get_current_user
     @current_user = GetCurrentUser.call(request.headers).result
+  end
+
+  private
+
+  def user_not_authorized exception
+    policy_name = exception.policy.class.to_s.underscore
+    render json: {errors: [I18n.t("#{policy_name}.#{exception.query}", scope: "pundit", default: :default)]}, status: :forbidden
   end
 end
