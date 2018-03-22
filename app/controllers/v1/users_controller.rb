@@ -1,6 +1,6 @@
 class V1::UsersController < ApplicationController
 
-  before_action :authenticate_user, only: %i[request_friend accept_friend]
+  before_action :authenticate_user, only: %i[request_friend accept_friend friends]
   before_action :set_user, only: %i[request_friend accept_friend]
 
   def index
@@ -24,6 +24,66 @@ class V1::UsersController < ApplicationController
              else
                User.where('created_at <= ?', @timestamp).order(id: :desc).page(page).per(@limit)
              end
+    render status: :ok, template: 'v1/users/index.json.jbuilder'
+  end
+
+  def friends
+    @limit = if params[:limit] then
+               params[:limit].to_i
+             else
+               PAGE_LIMIT
+             end
+    page = if params[:page] then
+             params[:page].to_i
+           else
+             1
+           end
+    @timestamp = if params[:timestamp] then
+                   params[:timestamp].to_datetime
+                 else
+                   Time.zone.now
+                 end
+    @users = current_user.friends.where('users.created_at <= ?', @timestamp).order(id: :desc).page(page).per(@limit)
+    render status: :ok, template: 'v1/users/index.json.jbuilder'
+  end
+
+  def requested_friends
+    @limit = if params[:limit] then
+               params[:limit].to_i
+             else
+               PAGE_LIMIT
+             end
+    page = if params[:page] then
+             params[:page].to_i
+           else
+             1
+           end
+    @timestamp = if params[:timestamp] then
+                   params[:timestamp].to_datetime
+                 else
+                   Time.zone.now
+                 end
+    @users = current_user.requested_friends.where('users.created_at <= ?', @timestamp).order(id: :desc).page(page).per(@limit)
+    render status: :ok, template: 'v1/users/index.json.jbuilder'
+  end
+
+  def pending_friends
+    @limit = if params[:limit] then
+               params[:limit].to_i
+             else
+               PAGE_LIMIT
+             end
+    page = if params[:page] then
+             params[:page].to_i
+           else
+             1
+           end
+    @timestamp = if params[:timestamp] then
+                   params[:timestamp].to_datetime
+                 else
+                   Time.zone.now
+                 end
+    @users = current_user.pending_friends.where('users.created_at <= ?', @timestamp).order(id: :desc).page(page).per(@limit)
     render status: :ok, template: 'v1/users/index.json.jbuilder'
   end
 

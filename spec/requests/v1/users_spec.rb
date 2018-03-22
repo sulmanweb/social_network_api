@@ -83,4 +83,89 @@ RSpec.describe "V1::Users", type: :request do
       expect(json.length).to eq 1
     end
   end
+
+  describe "GET /v1/users/friends" do
+    before do
+      2.times.each do
+        FactoryBot.create(:user)
+      end
+      User.first.friend_request User.last
+    end
+    let(:u1_session) {User.first.sessions.create}
+    it "shows zero count if no friend" do
+      headers = sign_in_test_headers u1_session
+      get friends_v1_users_path, headers: headers
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 0
+      expect(json['page_info']['total_records']).to eql 0
+    end
+    it "shows the friend list" do
+      User.last.accept_request User.first
+      headers = sign_in_test_headers u1_session
+      get friends_v1_users_path, headers: headers
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 1
+      expect(json['page_info']['total_records']).to eql 1
+    end
+  end
+
+  describe "GET /v1/users/requested_friends" do
+    before do
+      2.times.each do
+        FactoryBot.create(:user)
+      end
+    end
+    let(:u1_session) {User.first.sessions.create}
+    it "shows zero count if no friend" do
+      headers = sign_in_test_headers u1_session
+      get requested_friends_v1_users_path, headers: headers
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 0
+      expect(json['page_info']['total_records']).to eql 0
+    end
+    it "shows the requested friend list" do
+      User.last.friend_request User.first
+      headers = sign_in_test_headers u1_session
+      get requested_friends_v1_users_path, headers: headers
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 1
+      expect(json['page_info']['total_records']).to eql 1
+    end
+  end
+
+  describe "GET /v1/users/pending_friends" do
+    before do
+      2.times.each do
+        FactoryBot.create(:user)
+      end
+    end
+    let(:u1_session) {User.first.sessions.create}
+    it "shows zero count if no friend" do
+      headers = sign_in_test_headers u1_session
+      get pending_friends_v1_users_path, headers: headers
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 0
+      expect(json['page_info']['total_records']).to eql 0
+    end
+    it "shows the requested friend list" do
+      User.first.friend_request User.last
+      headers = sign_in_test_headers u1_session
+      get pending_friends_v1_users_path, headers: headers
+      expect(response).to have_http_status(200)
+      json = JSON.parse(response.body)
+      expect(json.length).to eq 2
+      expect(json['page_info']['total_pages']).to eql 1
+      expect(json['page_info']['total_records']).to eql 1
+    end
+  end
 end
