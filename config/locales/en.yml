@@ -12,6 +12,8 @@ en:
       format_email: "entered is not in correct format"
       format_username: "must contain 1 to 15 lowercase characters, and/or numeric characters and/or underscores"
       format_password: "must contain at least a lowercase letter, a uppercase, a digit, a special char and 8 to 72 chars"
+      friend_request: "There was some error sending the friend request"
+      friend_accept: "There was some error accepting the friend request"
   user_mailer:
     confirmation:
       subject: "Confirm your email"
@@ -25,11 +27,27 @@ en:
       body1: "Someone has sent a reset password request. If you sent the request then click on the link below to change your password otherwise ignore this message"
       call_to_action: "Change Your Password"
       footer: "Best Regards and Happy Socialism."
+  friendships_mailer:
+    requested:
+      subject: "A new friend request has been sent to you - Social Casts"
+      greetings: "Hi!"
+      body1: "%{name}(%{username}) has sent you request to become friends with you. Login the website to accept the request."
+      footer: "Best Regards and Happy Socialism."
+    accepted:
+      subject: "A new friend request has been sent to you - Social Casts"
+      greetings: "Hi!"
+      body1: "%{name}(%{username}) has accepted your request to become friend. Login the website to view the profile."
+      footer: "Best Regards and Happy Socialism."
   messages:
     forget_request_sent: "Change password instructions has been sent to the email."
     password_reset: "Your password has been reset successfully"
+    friend_request_sent: "Your friend request has been sent."
+    friend_request_accepted: "Congrats you have a friend"
   pundit:
-     default: 'You cannot perform this action.'
+     default: "You cannot perform this action."
      post_policy:
-       update?: 'You are not the author of this post'
-       create?: 'You cannot create posts!'
+       update?: "You are not the author of this post"
+       create?: "You cannot create posts!"
+     user_policy:
+       request_friend?: "You are not allowed to send friend request"
+       accept_friend?: "You are not allowed to accept the request"

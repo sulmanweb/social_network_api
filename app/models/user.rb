@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
+  has_friendship
   # Email Validations
   validates :email, presence: true, uniqueness: true, format: {with: /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/, message: I18n.t('errors.users.format_email')}
 
@@ -20,6 +21,18 @@ class User < ApplicationRecord
 
   def confirmed?
     !self.confirmed_at.nil?
+  end
+
+  def friend_count
+    self.friends.count
+  end
+
+  def friend_requested? user
+    self.requested_friends.include? user
+  end
+
+  def friend? user
+    self.friends_with? user
   end
 
   private

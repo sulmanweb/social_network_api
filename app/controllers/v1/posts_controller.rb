@@ -29,8 +29,16 @@ class V1::PostsController < ApplicationController
   end
 
   def user_posts
-    @limit = params[:limit].to_i || PAGE_LIMIT
-    page = params[:page].to_i || 1
+    @limit = if params[:limit] then
+               params[:limit].to_i
+             else
+               PAGE_LIMIT
+             end
+    page = if params[:page] then
+             params[:page].to_i
+           else
+             1
+           end
     @timestamp = if params[:timestamp] then
                    params[:timestamp].to_datetime
                  else
