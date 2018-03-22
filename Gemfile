@@ -28,6 +28,8 @@ gem 'simple_command', '0.0.9'
 gem 'pundit', '1.1.0'
 # for pagination
 gem 'kaminari', '1.1.1'
+# for friendships
+gem 'has_friendship', '1.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
