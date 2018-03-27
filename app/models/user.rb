@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :user_confirmations, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   after_create :send_confirmation
 
