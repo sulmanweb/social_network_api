@@ -18,6 +18,18 @@ gem 'jbuilder', '2.7.0'
 gem 'rack-cors', '1.0.2'
 # for secret keys
 gem 'figaro', '1.1.1'
+# for encrypted passwords
+gem 'bcrypt', '3.1.11'
+# for jwt tokens
+gem 'jwt', '2.1.0'
+# for service objects
+gem 'simple_command', '0.0.9'
+# for authorizations
+gem 'pundit', '1.1.0'
+# for pagination
+gem 'kaminari', '1.1.1'
+# for friendships
+gem 'has_friendship', '1.1.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -38,6 +50,12 @@ group :development do
   gem 'spring-commands-rspec', '1.0.4'
   # to view emails in browser
   gem 'letter_opener', '1.4.1'
+  # for deployment
+  gem 'capistrano', '3.10.1'
+  gem 'capistrano-rails', '1.3.1'
+  gem 'capistrano-rbenv', '2.1.3'
+  gem 'capistrano-rails-console', '2.2.1'
+  gem 'airbrussh', '1.3.0'
 
 end
 

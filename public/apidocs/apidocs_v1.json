@@ -1,0 +1,1563 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Social Network API",
+    "description": "social casts api REST"
+  },
+  "host": "api-social.castsapp.com",
+  "basePath": "/v1",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Authorization": {
+      "name": "Authorization",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/home": {
+      "get": {
+        "operationId": "GET_home",
+        "summary": "Timeline",
+        "tags": [
+          "Home"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/post"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/auth/sign_up": {
+      "post": {
+        "operationId": "POST_auth-sign_up",
+        "summary": "Sign Up",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/register-user-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/register-user"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        }
+      }
+    },
+    "/auth/sign_in": {
+      "post": {
+        "operationId": "POST_auth-sign_in",
+        "summary": "Sign In",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/signin-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/signin"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        }
+      }
+    },
+    "/auth/sign_out": {
+      "delete": {
+        "operationId": "DELETE_auth-sign_out",
+        "summary": "Sign Out",
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/auth/destroy": {
+      "delete": {
+        "operationId": "DELETE_auth-destroy",
+        "summary": "Destroy User Self",
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/auth/confirm_email": {
+      "get": {
+        "operationId": "GET_auth-confirm_email",
+        "summary": "Confirm Email",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        }
+      }
+    },
+    "/auth/reset_password": {
+      "post": {
+        "operationId": "POST_auth-reset_password",
+        "summary": "Request Reset Password",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/request-reset-password-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        }
+      }
+    },
+    "/auth/update_reset": {
+      "get": {
+        "operationId": "GET_auth-update_reset",
+        "summary": "Verify Reset Password Token",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        }
+      }
+    },
+    "/auth/change_password": {
+      "put": {
+        "operationId": "PUT_auth-change_password",
+        "summary": "Change User Password",
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/change-password-input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/posts": {
+      "post": {
+        "operationId": "POST_posts",
+        "summary": "Create Post",
+        "tags": [
+          "Posts"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/post"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/posts/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "PUT_posts-id",
+        "summary": "Update Post",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Only Post owner can edit the post",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/post-input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/post"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "DELETE_posts-id",
+        "summary": "Delete Post",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Only Post owner can delete the post",
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/{user_id}/posts": {
+      "parameters": [
+        {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "operationId": "GET_users-user_id-posts",
+        "summary": "User Posts",
+        "tags": [
+          "Posts"
+        ],
+        "description": "Get the user posts",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/post-index"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/posts/{post_id}/comments": {
+      "parameters": [
+        {
+          "name": "post_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "POST_posts-post_id-comments",
+        "summary": "Create a comment on post",
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/comment-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "GET_posts-post_id-comments",
+        "summary": "get all comment on post",
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "comments": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/comment"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/posts/{post_id}/comments/{id}": {
+      "parameters": [
+        {
+          "name": "post_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "PUT_posts-post_id-comments-id",
+        "summary": "Update a comment",
+        "tags": [
+          "Comments"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/comment-input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "delete": {
+        "operationId": "DELETE_posts-post_id-comments-id",
+        "summary": "Delete a comment",
+        "tags": [
+          "Comments"
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "operationId": "GET_users",
+        "summary": "All Users",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/user"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/friends": {
+      "get": {
+        "operationId": "GET_users-friends",
+        "summary": "Friend List",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/user"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/pending_friends": {
+      "get": {
+        "operationId": "GET_users-pending_friends",
+        "summary": "Pending friend requests",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/user"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/requested_friends": {
+      "get": {
+        "operationId": "GET_users-requested_friends",
+        "summary": "Requested Friends",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/user"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/request_friend": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "PUT_users-id-request_friend",
+        "summary": "Request a User to become Friend",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/users/{id}/accept_friend": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "PUT_users-id-accept_friend",
+        "summary": "Accept a user as friend",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/message"
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "trait:pagination:limit": {
+      "name": "limit",
+      "in": "query",
+      "description": "Record size",
+      "type": "integer"
+    },
+    "trait:pagination:page": {
+      "name": "page",
+      "in": "query",
+      "description": "page number to get",
+      "type": "integer"
+    },
+    "trait:pagination:timestamp": {
+      "name": "timestamp",
+      "in": "query",
+      "description": "Timestamp until records being needed",
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "responses": {
+    "trait:standardErrors:401": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    },
+    "trait:standardErrors:403": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    },
+    "trait:standardErrors:404": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    },
+    "trait:standardErrors:422": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    },
+    "trait:standardErrors:500": {
+      "description": "",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "errors"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "register-user-input": {
+      "title": "Register User Input",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string",
+          "pattern": "^([\\w+\\-]\\.?)+@[a-z\\d\\-]+(\\.[a-z]+)*\\.[a-z]+$"
+        },
+        "username": {
+          "type": "string",
+          "pattern": "^([a-z\\d_]){1,15}$",
+          "description": "must contain 1 to 15 lowercase characters, and/or numeric characters and/or underscores"
+        },
+        "password": {
+          "type": "string",
+          "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\\W]).{8,72}$",
+          "description": "must contain at least a lowercase letter, a uppercase, a digit, a special char and 8 to 72 chars"
+        },
+        "password_confirmation": {
+          "type": "string",
+          "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\\W]).{8,72}$",
+          "description": "must contain at least a lowercase letter, a uppercase, a digit, a special char and 8 to 72 chars"
+        }
+      },
+      "required": [
+        "email",
+        "username",
+        "password",
+        "password_confirmation"
+      ],
+      "example": {
+        "email": "sulmanweb@gmail.com",
+        "username": "sulmanweb",
+        "password": "Abcd@1234",
+        "password_confirmation": "Abcd@1234"
+      }
+    },
+    "register-user": {
+      "title": "Register User",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "username",
+        "created_at"
+      ],
+      "example": {
+        "id": 89127322,
+        "name": "occaecat do magna",
+        "email": "pariatur fugiat ut culpa enim",
+        "username": "Duis sunt minim anim incididunt",
+        "created_at": "2738-10-21T03:07:32.206Z"
+      }
+    },
+    "signin-input": {
+      "title": "Signin Input",
+      "type": "object",
+      "properties": {
+        "auth": {
+          "type": "string",
+          "description": "username / email"
+        },
+        "password": {
+          "type": "string",
+          "description": "must contain at least a lowercase letter, a uppercase, a digit, a special char and 8 to 72 chars",
+          "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\\W]).{8,72}$"
+        }
+      },
+      "required": [
+        "auth",
+        "password"
+      ],
+      "example": {
+        "auth": "sulmanweb",
+        "password": "Abcd@1234"
+      }
+    },
+    "signin": {
+      "title": "SignIn",
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "request-reset-password-input": {
+      "title": "Request Reset Password Input",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "pattern": "^([\\w+\\-]\\.?)+@[a-z\\d\\-]+(\\.[a-z]+)*\\.[a-z]+$"
+        }
+      },
+      "required": [
+        "email"
+      ]
+    },
+    "message": {
+      "title": "Message",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "change-password-input": {
+      "title": "Change Password Input",
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\\W]).{8,72}$"
+        },
+        "password_confirmation": {
+          "type": "string",
+          "pattern": "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\\W]).{8,72}$"
+        }
+      },
+      "required": [
+        "password",
+        "password_confirmation"
+      ]
+    },
+    "post-input": {
+      "title": "Post Input",
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "body"
+      ],
+      "example": {
+        "body": "quis mollit"
+      }
+    },
+    "post": {
+      "title": "Post",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "body": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "body",
+        "user_id",
+        "created_at"
+      ],
+      "example": {
+        "id": 41399876,
+        "body": "proident magna nulla sunt",
+        "user_id": 55747923,
+        "created_at": "2667-10-01T17:21:46.143Z"
+      }
+    },
+    "page-info": {
+      "title": "Page Info",
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "time before which the records are presented"
+        },
+        "limit": {
+          "type": "integer",
+          "description": "max records per page to be shown"
+        },
+        "page_size": {
+          "type": "integer",
+          "description": "records shown in current page"
+        },
+        "more_available": {
+          "type": "boolean",
+          "description": "more pages available or not"
+        },
+        "total_records": {
+          "type": "integer",
+          "description": "total records available in db"
+        },
+        "page": {
+          "type": "integer",
+          "default": "",
+          "description": "current page number"
+        },
+        "total_pages": {
+          "type": "integer",
+          "description": "Total pages according to limit available in system"
+        }
+      },
+      "required": [
+        "timestamp",
+        "limit",
+        "page_size",
+        "more_available",
+        "total_records",
+        "page",
+        "total_pages"
+      ]
+    },
+    "post-index": {
+      "title": "Post Index",
+      "type": "object",
+      "properties": {
+        "page_info": {
+          "$ref": "#/definitions/page-info"
+        },
+        "posts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/post"
+          }
+        }
+      }
+    },
+    "user": {
+      "title": "user",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "requested": {
+          "type": "boolean"
+        },
+        "friend": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "name",
+        "created_at"
+      ]
+    },
+    "comment-input": {
+      "title": "Comment Input",
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "comment": {
+      "title": "Comment",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "body": {
+          "type": "string"
+        },
+        "post_id": {
+          "type": "integer"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "body",
+        "post_id",
+        "user_id",
+        "created_at"
+      ]
+    }
+  }
+}

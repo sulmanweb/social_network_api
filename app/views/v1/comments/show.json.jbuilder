@@ -1,0 +1,1 @@
+json.partial! 'v1/comments/comment.json.jbuilder', comment: @comment

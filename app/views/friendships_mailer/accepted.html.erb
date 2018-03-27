@@ -1,0 +1,3 @@
+<h1><%= I18n.t('friendships_mailer.accepted.greetings') %> <%= @user.name %></h1>
+<p><%= I18n.t('friendships_mailer.accepted.body1', name: @accepter.name, username: @accepter.username) %></p>
+<p><%= I18n.t('friendships_mailer.accepted.footer') %></p>
