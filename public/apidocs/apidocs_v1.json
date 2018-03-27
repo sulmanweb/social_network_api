@@ -24,6 +24,65 @@
     }
   },
   "paths": {
+    "/home": {
+      "get": {
+        "operationId": "GET_home",
+        "summary": "Timeline",
+        "tags": [
+          "Home"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:pagination:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:page"
+          },
+          {
+            "$ref": "#/parameters/trait:pagination:timestamp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page_info": {
+                  "$ref": "#/definitions/page-info"
+                },
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/post"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "422": {
+            "$ref": "#/responses/trait:standardErrors:422"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
     "/auth/sign_up": {
       "post": {
         "operationId": "POST_auth-sign_up",
