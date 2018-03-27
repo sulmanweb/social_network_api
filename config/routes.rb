@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       get 'update_reset', to: 'passwords#update'
       put 'change_password', to: 'passwords#change_password'
     end
-    resources :posts, only: %i[create update destroy]
+    resources :posts, only: %i[create update destroy] do
+      resources :comments, only: %i[index create update destroy]
+    end
     resources :users, only: %i[index] do
       member do
         put :request_friend
