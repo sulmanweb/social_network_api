@@ -64,15 +64,14 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: ENV['mailer_domain'],
-      port: '465',
-      user_name: ENV['mailer_username'],
-      password: ENV['mailer_password'],
-      authentication: :plain,
-      openssl_verify_mode: 'none',
-      ssl: true,
-      enable_starttls_auto: true,
-      tls: true
+      :address => ENV['mailer_domain'],
+      :port => 587,
+      :user_name => ENV['mailer_username'],
+      :password => ENV['mailer_password'],
+      :authentication => :login,
+      :ssl => true,
+      :tls => true,
+      :enable_starttls_auto => true
   }
 
 
