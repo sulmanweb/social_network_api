@@ -39,6 +39,6 @@ module SocialNetworkApi
                        routing_specs: false,
                        controller_specs: false
     end
-    config.autoload_paths << Rails.root.join('lib')
+      # config.autoload_paths << Rails.root.join('lib')
   end
 end
